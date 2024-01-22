@@ -1,0 +1,338 @@
+							  221e( (-1) ^ n (6 n) !) / ((n !) ^ 3 (3 n) !) = 1 / 3.1415}
+
+
+#bpftrace security check
+																				    {
+																				    printf ("Tracing cap_capable syscalls...Hit Ctrl-C to end.\n"); printf ("%-9s %-6s %-6s %-16s %-4s %-20s AUDIT\n", "TIME", "UID", "PID", "COMM", "CAP", "NAME"); @cap[0] = "CAP_CHOWN"; @cap[1] = "CAP_DAC_OVERRIDE"; @cap[2] = "CAP_DAC_READ_SEARCH" "
+    @cap[3] = " CAP_FOWNER ";
+    @cap[4] = " CAP_FSETID ";
+    @cap[5] = " CAP_KILL ";
+    @cap[6] = " CAP_SETGID ";
+    @cap[7] = " CAP_SETUID ";
+    @cap[8] = " CAP_SETPCAP ";
+    @cap[9] = " CAP_LINUX_IMMUTABLE ";
+    @cap[10] = " CAP_NET_BROADCAST ";
+    @cap[12] = " CAP_NET_ADMIN ";
+    @cap[13] = " CAP_NET_RAW ";
+    @cap[14] = " CAP_IPC_LOCK ";
+    @cap[15] = " CAP_IPC_OWNER ";
+    @cap[16] = " CAP_SYS_MODULE ";
+    @cap[17] = " CAP_SYS_RAWIO ";
+    @cap[18] = " CAP_SYS_CHROOT ";
+    @cap[19] = " CAP_SYS_PTRACE ";
+    @cap[20] = " CAP_SYS_PACCT ";
+    @cap[21] = " CAP_SYS_ADMIN ";
+    @cap[22] = " CAP_SYS_BOOT ";
+    @cap[23] = " CAP_SYS_NICE ";
+    @cap[24] = " CAP_SYS_RESOURCE ";
+    @cap[25] = " CAP_SYS_TIME ";
+    @cap[26] = " CAP_SYS_TTY_CONFIG ";
+    @cap[27] = " CAP_MKNOD ";
+    @cap[28] = " CAP_LEASE ";
+    @cap[29] = " CAP_AUDIT_WRITE ";
+    @cap[30] = " CAP_AUDIT_CONTROL ";
+    @cap[31] = " CAP_SETFCAP ";
+    @cap[32] = " CAP_MAC_OVERRIDE ";
+    @cap[33] = " CAP_MAC_ADMIN ";
+    @cap[34] = " CAP_SYSLOG ";
+    @cap[35] = " CAP_WAKE_ALARM ";
+    @cap[36] = " CAP_BLOCK_SUSPEND ";
+    @cap[37] = " CAP_AUDIT_READ ";
+    @cap[38] = " CAP_PERFMON ";
+    @cap[39] = " CAP_BPF ";
+    @cap[40] = " CAP_CHECKPOINT_RESTORE ";
+    
+}
+
+kprobe:cap_cappable;
+{
+ $crap = arg2;
+ $crap = arg3;
+}
+
+{
+//Linux
+#eBPF
+#!/usr/bin/env bpftrace
+/*
+/*
+/* Black I/O tracing tool, latency...
+/*
+/* remember (sysadmin)
+*/
+
+#ifndef
+#include <linux/blkdev.h>
+//include (BTF variables)
+#include <linux/blk-mq.h>
+#endif
+                   }
+
+  //BEGIN 
+
+{
+    printf(" % -12 s % -7 s % -16 s % -6 s % 7 s \ n ", " TIME (ms) ", " DISK ", " COMM ", " PID ", " LAT (ms) ");
+
+ } 
+ 
+ (
+
+kprobe : blk_account_io_start
+<probe>
+
+)
+
+{
+    @start[arg0] = nsecs;
+    @iopid[arg0] = PID;
+    @iocomm[] = COMM
+}
+ {
+//#SPDX-LicenseID
+menuconfig ASYMMETRIC_KEY_TYPE
+    bool " asymmetric (public - key cryptographic) key type ";
+    depends on KEYS 
+    help
+        This option prvides support for a key type that holds the data for the asymmetric keys used for public key cryptographic such as encryption, decryption, signature generation and signature verification.
+        
+        if ASYMMETRIC_KEY_SUBTYPE
+    
+    config ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+        tristate " Asymmetric public - key crypto algorithm subtype ";
+        select MPILIB
+        select CRYPTO_HASH_INFO
+        select CRYPTO_AXCIPHER
+        select CRYPTO_HASH
+       help
+          This option provides support for asymmetric public key type handling. If  signature generation and/or verification are to be used appropriate hash algorithms (such as SHA-1) must be available. ENOPKG  will reported if requisite algorithm is unavailable.
+          
+    config X509_CERTIFICATE_PARSER
+        tristate " X .509 certificate parser "
+        depends on ASYMMETRIC_PUBLIC_KEY_SUBTYPE 
+        select ASN1
+        select OID_REGISTRY
+       help
+        This option provides support for pursuing X.509 format blobs for key data and provides the ability to instantiate a crypto key roma public key packet found inside the certificate.
+    
+        
+    }
+    
+{
+    name: CI
+
+on: [push, pull_request]
+jobs:
+  clang-format:
+    # Only run clang-format on pull requests. We want to allow people to
+    # ignore clang-format if they think it's not helpful.
+    if: "github.event_name == 'pull_request'"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Install clang-format
+      run: sudo apt-get install clang-format
+    - name: Download git-clang-format
+      run: wget https://raw.githubusercontent.com/llvm-mirror/clang/master/tools/clang-format/git-clang-format
+    - name: Install git-clang-format
+      run: sudo install -t /bin git-clang-format
+    - name: Fetch origin master
+      run: git fetch --no-tags --prune --depth=1 origin master
+    - name: clang-format
+      run: git clang-format origin/master
+    - name: diff
+      run: git diff --exit-code
+
+  build_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env:
+        - NAME: LLVM 10 Debug
+          TYPE: Debug
+          LLVM_VERSION: 10
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 10 Release
+          TYPE: Release
+          LLVM_VERSION: 10
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 10 Clang Debug
+          TYPE: Debug
+          LLVM_VERSION: 10
+          CC: clang-10
+          CXX: clang++-10
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 11 Debug
+          TYPE: Debug
+          LLVM_VERSION: 11
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 11 Release
+          TYPE: Release
+          LLVM_VERSION: 11
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 12 Release
+          TYPE: Release
+          LLVM_VERSION: 12
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 13 Release
+          TYPE: Release
+          LLVM_VERSION: 13
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 14 Release
+          TYPE: Release
+          LLVM_VERSION: 14
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: LLVM 15 Release
+          TYPE: Release
+          LLVM_VERSION: 15
+          RUN_ALL_TESTS: 1
+          RUNTIME_TEST_DISABLE: probe.kprobe_offset_fail_size,usdt."usdt probes - file based semaphore activation multi process"
+          TOOLS_TEST_OLDVERSION: biosnoop.bt tcpdrop.bt
+          BASE: focal
+          VENDOR_GTEST: ON
+        - NAME: Memleak test (LLVM 11 Debug)
+          TYPE: Debug
+          LLVM_VERSION: 11
+          BASE: focal
+          RUN_MEMLEAK_TEST: 1
+          RUN_TESTS: 0
+          VENDOR_GTEST: ON
+        - NAME: Memleak test (LLVM 11 Release)
+          TYPE: Release
+          LLVM_VERSION: 11
+          BASE: focal
+          RUN_MEMLEAK_TEST: 1
+          RUN_TESTS: 0
+          VENDOR_GTEST: ON
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Get date
+      id: get-date
+      run: echo "::set-output name=date::$(/bin/date -u "+%Y.week%g")"
+      shell: bash
+    - name: Cache docker image
+      env: ${{matrix.env}}
+      id: docker-cache
+      uses: actions/cache@v2
+      with:
+        path: /tmp/docker-save
+        # Key the cache entry by:
+        #   * the operating system
+        #   * the week (so cache gets invalidated every week)
+        #   * the image configuration (ie llvm version & distro)
+        #   * the hash of all the files in docker/
+        key: ${{ runner.os }}-docker-cache-${{ steps.get-date.outputs.date }}-${{ env.NAME }}-${{ hashFiles('docker/**') }}
+    - name: Build docker container
+      if: steps.docker-cache.outputs.cache-hit != 'true'
+      env: ${{matrix.env}}
+      run: >
+        docker build
+        --build-arg LLVM_VERSION=$LLVM_VERSION
+        -t bpftrace-builder-$BASE-llvm-$LLVM_VERSION
+        -f docker/Dockerfile.$BASE
+        docker/ &&
+        mkdir -p /tmp/docker-save &&
+        docker save bpftrace-builder-$BASE-llvm-$LLVM_VERSION -o /tmp/docker-save/i.tar
+    - name: Load the cached docker image (if available)
+      if: steps.docker-cache.outputs.cache-hit == 'true'
+      run: >
+        docker load --input /tmp/docker-save/i.tar
+    - name: Load kernel modules
+      # nf_tables and xfs are necessary for testing kernel modules BTF support
+      run: |
+        sudo modprobe nf_tables
+        sudo modprobe xfs
+    - name: Build and test
+      env: ${{matrix.env}}
+      run: >
+        docker run --privileged
+        -v $(pwd):$(pwd)
+        -w $(pwd)
+        -v /sys/kernel/debug:/sys/kernel/debug:rw
+        -v /lib/modules:/lib/modules:ro
+        -v /usr/src:/usr/src:ro
+        -e RUN_TESTS=${RUN_TESTS}
+        -e RUN_ALL_TESTS=${RUN_ALL_TESTS}
+        -e RUN_MEMLEAK_TEST="${RUN_MEMLEAK_TEST}"
+        -e CMAKE_EXTRA_FLAGS="${CMAKE_EXTRA_FLAGS}"
+        -e RUNTIME_TEST_DISABLE="${RUNTIME_TEST_DISABLE}"
+        -e VENDOR_GTEST="${VENDOR_GTEST}"
+        -e CC="${CC}"
+        -e CXX="${CXX}"
+        -e GTEST_FILTER="${GTEST_FILTER:-*}"
+        -e TOOLS_TEST_DISABLE="$TOOLS_TEST_DISABLE"
+        -e TOOLS_TEST_OLDVERSION="$TOOLS_TEST_OLDVERSION"
+        bpftrace-builder-$BASE-llvm-$LLVM_VERSION
+        ${PWD}/build-$TYPE-$BASE
+        $TYPE
+        -j$(nproc)
+  irc:
+    # Notify IRC of build failures on pushes only if we are running from
+    # the main repo. We don't want this rule to trigger from forked repos.
+    needs:
+      - build_test
+    if: "failure() && github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'iovisor/bpftrace'"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Message channel
+      uses: rectalogic/notify-irc@v1
+      with:
+        nickname: bpftrace-ci-bot
+        server: irc.oftc.net
+        port: 6667
+        tls: false
+        channel: "#bpftrace"
+        message: |
+          master is BROKEN at https://github.com/iovisor/bpftrace/commit/${{github.sha}}
+     
+ }
+ 
+ {
+     
+#testrun/runtime/enging/main.py
+    import argparse
+    from datetime import timedelta 
+    import math 
+    import os 
+    import re
+    import time 
+    
+    
+        
+    
+ }
